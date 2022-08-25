@@ -7,10 +7,9 @@ const database = process.env.DB_DATABASE || 'file_manager';
 class DBClient {
   constructor() {
     this.client = new MongoClient(`mongodb://${host}:${port}`, { useUnifiedTopology: true, useNewUrlParser: true });
-    this.client.connect()
-      .then(() => {
-        this.db = this.client.db(database);
-      }).catch((error) => console.log(error));
+    this.client.connect().then(() => {
+      this.db = this.client.db(database);
+    }).catch((error) => console.log(error));
   }
 
   isAlive() {
