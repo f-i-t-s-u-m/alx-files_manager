@@ -1,11 +1,12 @@
 import { MongoClient } from 'mongodb';
 
+const host = process.env.DB_HOST || 'localhost';
+const port = process.env.SB_PORT || 27017;
+const database = process.env.DB_DATABASE || 'file_manager';
+
 class DBClient {
   constructor() {
-    const host = process.env.DB_HOST || 'localhost';
-    const port = process.env.SB_PORT || 27017;
-    const database = process.env.DB_DATABASE || 'file_manager';
-    this.client = new MongoClient(`mongodb://${host}:${port}`, { useUnifiedTopology: true });
+    this.client = new MongoClient(`mongodb://${host}:${port}`, { useUnifiedTopology: true, useNewUrlParser: true });
     this.client.connect()
       .then(() => {
         this.db = this.client.db(database);
